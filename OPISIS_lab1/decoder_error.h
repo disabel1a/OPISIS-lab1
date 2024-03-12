@@ -181,9 +181,11 @@ double count_upper_assessment(unsigned int len, unsigned int r, unsigned int d, 
 double count_accurate_error(std::vector<unsigned int>& weights, unsigned int len, unsigned int r, unsigned int d, double p) {
     unsigned int k = len - r;
     double result = 0.0;
-    
-    for (unsigned int i = d; i < len; i++)
-        result += weights[i] * pow(p, i) * pow((1 - p), (len - i));
+
+    for (unsigned int i = d; i < len + 1; i++) {
+        double curr = weights[i] * pow(p, i) * pow((1 - p), (len - i));
+        result += curr;
+    }
 
     return result;
 }
